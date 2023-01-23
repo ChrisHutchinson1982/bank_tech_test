@@ -1,3 +1,5 @@
+const Transaction = require("./transaction");
+
 class Account {
   constructor() {
     this.allTransactions = [];
@@ -6,7 +8,11 @@ class Account {
   add(transaction) {
     this.currentBalance += transaction.amount;
     this.allTransactions.push(
-      `\n${transaction.date} || ${transaction.amount}.00 || || ${this.currentBalance}.00`
+      `\n${
+        transaction.date
+      } || ${transaction.creditAmount()} || ${transaction.debitAmount()}|| ${
+        this.currentBalance
+      }.00`
     );
   }
   printStatement() {
