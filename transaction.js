@@ -12,6 +12,14 @@ class Transaction {
       return "";
     }
   }
+
+  getValue() {
+    if (this.type === "debit") {
+      return -this.amount;
+    } else {
+      return this.amount;
+    }
+  }
 }
 
 module.exports = Transaction;

@@ -15,7 +15,7 @@ describe("creates a transaction oject", () => {
   });
 });
 
-describe("checks if transaction is credit or debit and format to 2dp", () => {
+describe("checks if transaction is credit or debit and returns correct format for statement", () => {
   it("when a deposit of 1000 on 10-01-2023", () => {
     const deposit = new Transaction("credit", 1000, "10/01/2023");
     expect(deposit.getAmountFormat("credit")).toBe("1000.00 ");
@@ -25,5 +25,16 @@ describe("checks if transaction is credit or debit and format to 2dp", () => {
     const withdrawal = new Transaction("debit", 500, "14/01/2023");
     expect(withdrawal.getAmountFormat("debit")).toBe("500.00 ");
     expect(withdrawal.getAmountFormat("credit")).toBe("");
+  });
+});
+
+describe("checks if transaction is credit or debit and returns value", () => {
+  it("when a deposit of 1000 on 10-01-2023", () => {
+    const deposit = new Transaction("credit", 1000, "10/01/2023");
+    expect(deposit.getValue()).toBe(1000);
+  });
+  it("when a withdrawal of 500 on 14/01/2023", () => {
+    const withdrawal = new Transaction("debit", 500, "14/01/2023");
+    expect(withdrawal.getValue()).toBe(-500);
   });
 });

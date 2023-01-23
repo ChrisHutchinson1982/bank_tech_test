@@ -6,11 +6,7 @@ class Account {
     this.currentBalance = 0;
   }
   add(transaction) {
-    if (transaction.type === "credit") {
-      this.currentBalance += transaction.amount;
-    } else {
-      this.currentBalance -= transaction.amount;
-    }
+    this.currentBalance += transaction.getValue();
 
     this.allTransactions.push(
       `\n${transaction.date} || ${transaction.getAmountFormat(
