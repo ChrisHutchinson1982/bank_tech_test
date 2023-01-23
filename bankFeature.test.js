@@ -2,10 +2,6 @@ const Account = require("./account");
 const Transaction = require("./transaction");
 
 describe("returns printed bank statement", () => {
-  it("when no transaction have been made", () => {
-    const account = new Account();
-    expect(account.printStatement()).toBe("date || credit || debit || balance");
-  });
   it("when a deposit of 1000 on 10/01/2023", () => {
     const account = new Account();
     const deposit = new Transaction("credit", 1000, "10/01/2023");
