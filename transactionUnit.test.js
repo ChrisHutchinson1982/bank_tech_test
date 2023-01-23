@@ -14,3 +14,16 @@ describe("creates a transaction oject", () => {
     expect(withdrawal.date).toBe("14/01/2023");
   });
 });
+
+describe("checks if transaction is credit or debit", () => {
+  it("when a deposit of 1000 on 10-01-2023", () => {
+    const deposit = new Transaction("credit", 1000, "10/01/2023");
+    expect(deposit.creditAmount()).toBe(1000);
+    expect(deposit.debitAmount()).toBeNull();
+  });
+  it("when a withdrawal of 500 on 14/01/2023", () => {
+    const withdrawal = new Transaction("debit", 500, "14/01/2023");
+    expect(withdrawal.debitAmount()).toBe(500);
+    expect(withdrawal.creditAmount()).toBeNull();
+  });
+});

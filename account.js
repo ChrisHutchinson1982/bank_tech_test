@@ -10,13 +10,13 @@ class Account {
     );
   }
   printStatement() {
-    console.log(this.#getHeaders() + this.getTransactions());
-    const statement = this.#getHeaders() + this.getTransactions();
+    const statement = this.#getHeaders() + this.#getTransactions();
     return statement;
   }
 
-  getTransactions() {
-    return this.allTransactions.reverse().join("");
+  #getTransactions() {
+    const formatTransactions = this.allTransactions.reverse().join("");
+    return formatTransactions;
   }
 
   #getHeaders() {

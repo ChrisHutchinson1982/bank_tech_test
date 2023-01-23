@@ -20,9 +20,6 @@ describe("returns printed bank statement", () => {
     account.add(depositOne);
     const depositTwo = new Transaction("credit", 2000, "13/01/2023");
     account.add(depositTwo);
-    expect(account.getTransactions()).toBe(
-      "\n13/01/2023 || 2000.00 || || 3000.00\n10/01/2023 || 1000.00 || || 1000.00"
-    );
     expect(account.printStatement()).toBe(
       "date || credit || debit || balance\n13/01/2023 || 2000.00 || || 3000.00\n10/01/2023 || 1000.00 || || 1000.00"
     );
