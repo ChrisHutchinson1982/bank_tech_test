@@ -3,7 +3,7 @@ class Account {
     this.allTransactions = [];
   }
   add(transaction) {
-    this.allTransactions = "\n10/01/2023 || 1000.00 || || 1000.00";
+    this.allTransactions = `\n${transaction.date} || ${transaction.amount}.00 || || ${transaction.amount}.00`;
   }
   printStatement() {
     console.log("date || credit || debit || balance" + this.allTransactions);
