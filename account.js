@@ -6,6 +6,8 @@ class Account {
     this.currentBalance = 0;
   }
   add(transaction) {
+    this.#errorHandler(transaction);
+
     const date = transaction.date;
     const credit = transaction.getAmountFormat("credit");
     const debit = transaction.getAmountFormat("debit");
@@ -31,6 +33,12 @@ class Account {
     this.currentBalance += transaction.getValue();
     const balance = parseFloat(this.currentBalance).toFixed(2);
     return balance;
+  }
+
+  #errorHandler(transaction) {
+    if (this.currentBalance + transaction.getValue() < 0) {
+      throw new Error("Unable to complete transaction: insufficient funds");
+    }
   }
 }
 

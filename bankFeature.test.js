@@ -36,7 +36,7 @@ describe("returns printed bank statement", () => {
       "date || credit || debit || balance\n14/01/2023 || || 500.00 || 2500.00\n13/01/2023 || 2000.00 || || 3000.00\n10/01/2023 || 1000.00 || || 1000.00"
     );
   });
-  it("when various deposits and withdrawals", () => {
+  it("when various deposits and withdrawals with decimal places", () => {
     const account = new Account();
     const depositOne = new Transaction("credit", 1000.01, "10/01/2023");
     account.add(depositOne);
@@ -53,4 +53,19 @@ describe("returns printed bank statement", () => {
   });
 });
 
+describe("returns error", () => {
+  it("when no deposits but a withdrawal of 500 on 14/01/2023", () => {
+    const account = new Account();
+    const withdrawal = new Transaction("debit", 500, "14/01/2023");
+
+    try {
+      account.add(withdrawal);
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error.message).toBe(
+        "Unable to complete transaction: insufficient funds"
+      );
+    }
+  });
+});
 // edge cases 0dp amount and differemt date formats
