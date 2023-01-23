@@ -14,12 +14,15 @@ describe("returns printed bank statement", () => {
       "date || credit || debit || balance\n10/01/2023 || 1000.00 || || 1000.00"
     );
   });
-  xit("when a deposit of 1000 on 10/01/2023 and a deposit of 2000 on 13/01/2023", () => {
+  it("when a deposit of 1000 on 10/01/2023 and a deposit of 2000 on 13/01/2023", () => {
     const account = new Account();
     const depositOne = new Transaction("credit", 1000, "10/01/2023");
     account.add(depositOne);
     const depositTwo = new Transaction("credit", 2000, "13/01/2023");
     account.add(depositTwo);
+    expect(account.getTransactions()).toBe(
+      "\n13/01/2023 || 2000.00 || || 3000.00\n10/01/2023 || 1000.00 || || 1000.00"
+    );
     expect(account.printStatement()).toBe(
       "date || credit || debit || balance\n13/01/2023 || 2000.00 || || 3000.00\n10/01/2023 || 1000.00 || || 1000.00"
     );
