@@ -6,13 +6,12 @@ class Account {
     this.currentBalance = 0;
   }
   add(transaction) {
-    this.currentBalance += transaction.getValue();
+    const date = transaction.date;
+    const credit = transaction.getAmountFormat("credit");
+    const debit = transaction.getAmountFormat("debit");
+    const balance = this.#getBalance(transaction);
 
-    this.allTransactions.push(
-      `\n${transaction.date} || ${transaction.getAmountFormat(
-        "credit"
-      )}|| ${transaction.getAmountFormat("debit")}|| ${this.currentBalance}.00`
-    );
+    this.allTransactions.push(`\n${date} || ${credit}|| ${debit}|| ${balance}`);
   }
   printStatement() {
     const statement = this.#getHeaders() + this.#getTransactions();
@@ -26,6 +25,12 @@ class Account {
 
   #getHeaders() {
     return "date || credit || debit || balance";
+  }
+
+  #getBalance(transaction) {
+    this.currentBalance += transaction.getValue();
+    const balance = parseFloat(this.currentBalance).toFixed(2);
+    return balance;
   }
 }
 
