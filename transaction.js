@@ -5,16 +5,8 @@ class Transaction {
     this.date = date;
   }
 
-  creditAmount() {
-    if (this.type === "credit") {
-      return `${parseFloat(this.amount).toFixed(2)} `;
-    } else {
-      return "";
-    }
-  }
-
-  debitAmount() {
-    if (this.type === "debit") {
+  getAmountFormat(type) {
+    if (this.type === type) {
       return `${parseFloat(this.amount).toFixed(2)} `;
     } else {
       return "";

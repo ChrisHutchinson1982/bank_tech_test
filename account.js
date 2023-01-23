@@ -13,11 +13,9 @@ class Account {
     }
 
     this.allTransactions.push(
-      `\n${
-        transaction.date
-      } || ${transaction.creditAmount()}|| ${transaction.debitAmount()}|| ${
-        this.currentBalance
-      }.00`
+      `\n${transaction.date} || ${transaction.getAmountFormat(
+        "credit"
+      )}|| ${transaction.getAmountFormat("debit")}|| ${this.currentBalance}.00`
     );
   }
   printStatement() {
