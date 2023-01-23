@@ -18,12 +18,12 @@ describe("creates a transaction oject", () => {
 describe("checks if transaction is credit or debit and format to 2dp", () => {
   it("when a deposit of 1000 on 10-01-2023", () => {
     const deposit = new Transaction("credit", 1000, "10/01/2023");
-    expect(deposit.creditAmount()).toBe("1000.00");
+    expect(deposit.creditAmount()).toBe("1000.00 ");
     expect(deposit.debitAmount()).toBe("");
   });
   it("when a withdrawal of 500 on 14/01/2023", () => {
     const withdrawal = new Transaction("debit", 500, "14/01/2023");
-    expect(withdrawal.debitAmount()).toBe("500.00");
+    expect(withdrawal.debitAmount()).toBe("500.00 ");
     expect(withdrawal.creditAmount()).toBe("");
   });
 });

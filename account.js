@@ -6,11 +6,16 @@ class Account {
     this.currentBalance = 0;
   }
   add(transaction) {
-    this.currentBalance += transaction.amount;
+    if (transaction.type === "credit") {
+      this.currentBalance += transaction.amount;
+    } else {
+      this.currentBalance -= transaction.amount;
+    }
+
     this.allTransactions.push(
       `\n${
         transaction.date
-      } || ${transaction.creditAmount()} || ${transaction.debitAmount()}|| ${
+      } || ${transaction.creditAmount()}|| ${transaction.debitAmount()}|| ${
         this.currentBalance
       }.00`
     );

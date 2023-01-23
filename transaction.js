@@ -7,7 +7,7 @@ class Transaction {
 
   creditAmount() {
     if (this.type === "credit") {
-      return parseFloat(this.amount).toFixed(2);
+      return `${parseFloat(this.amount).toFixed(2)} `;
     } else {
       return "";
     }
@@ -15,7 +15,7 @@ class Transaction {
 
   debitAmount() {
     if (this.type === "debit") {
-      return parseFloat(this.amount).toFixed(2);
+      return `${parseFloat(this.amount).toFixed(2)} `;
     } else {
       return "";
     }
