@@ -2,31 +2,38 @@ const Transaction = require("./transaction");
 
 class Account {
   constructor() {
+    this.totalBalance = 0;
     this.allTransactions = [];
-    this.currentBalance = 0;
   }
+
   add(transaction) {
     this.#errorHandler(transaction);
 
-    const date = transaction.date;
-    const credit = transaction.getAmountFormat("credit");
-    const debit = transaction.getAmountFormat("debit");
-    const balance = this.#getBalance(transaction);
-
-    this.allTransactions.push(`\n${date} || ${credit}|| ${debit}|| ${balance}`);
+    this.allTransactions.push(transaction);
+    this.totalBalance += transaction.getValue();
   }
+
   printStatement() {
     const statement = this.#getHeaders() + this.#getTransactions();
     return statement;
   }
 
-  #getTransactions() {
-    const formatTransactions = this.allTransactions.reverse().join("");
-    return formatTransactions;
-  }
-
   #getHeaders() {
     return "date || credit || debit || balance";
+  }
+
+  #getTransactions() {
+    this.currentBalance = 0;
+
+    const transactions = this.allTransactions.map((transaction) => {
+      const credit = transaction.getAmountFormat("credit");
+      const debit = transaction.getAmountFormat("debit");
+      const balance = this.#getBalance(transaction);
+
+      return `\n${transaction.date} || ${credit}|| ${debit}|| ${balance}`;
+    });
+
+    return transactions.reverse().join("");
   }
 
   #getBalance(transaction) {
@@ -36,7 +43,7 @@ class Account {
   }
 
   #errorHandler(transaction) {
-    if (this.currentBalance + transaction.getValue() < 0) {
+    if (this.totalBalance + transaction.getValue() < 0) {
       throw new Error("Unable to complete transaction: insufficient funds");
     }
   }

@@ -2,7 +2,7 @@ const Account = require("./account");
 const Transaction = require("./transaction");
 
 describe("returns printed bank statement", () => {
-  it("when no transaction haves been made", () => {
+  it("when no transaction have been made", () => {
     const account = new Account();
     expect(account.printStatement()).toBe("date || credit || debit || balance");
   });
