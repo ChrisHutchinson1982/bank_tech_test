@@ -5,19 +5,25 @@ class Transaction {
     this.date = date;
   }
 
-  getAmountFormat(type) {
-    if (this.type === type) {
-      return `${parseFloat(this.amount).toFixed(2)} `;
+  getValue() {
+    if (this.type === "credit") {
+      return this.amount;
     } else {
-      return "";
+      return -this.amount;
     }
   }
 
-  getValue() {
-    if (this.type === "debit") {
-      return -this.amount;
+  getStatmentFormat() {
+    return `\n${this.date} || ${this.#getAmountFormat()}||`;
+  }
+
+  #getAmountFormat() {
+    const amount = parseFloat(this.amount).toFixed(2);
+
+    if (this.type === "credit") {
+      return `${amount} || `;
     } else {
-      return this.amount;
+      return `|| ${amount} `;
     }
   }
 }

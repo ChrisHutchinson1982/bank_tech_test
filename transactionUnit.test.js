@@ -15,20 +15,18 @@ describe("creates a transaction oject", () => {
   });
 });
 
-describe("checks if transaction is credit or debit and returns correct format for statement", () => {
+describe("returns correct format for statement", () => {
   it("when a deposit of 1000 on 10-01-2023", () => {
     const deposit = new Transaction("credit", 1000, "10/01/2023");
-    expect(deposit.getAmountFormat("credit")).toBe("1000.00 ");
-    expect(deposit.getAmountFormat("debit")).toBe("");
+    expect(deposit.getStatmentFormat()).toBe("\n10/01/2023 || 1000.00 || ||");
   });
   it("when a withdrawal of 500 on 14/01/2023", () => {
     const withdrawal = new Transaction("debit", 500, "14/01/2023");
-    expect(withdrawal.getAmountFormat("debit")).toBe("500.00 ");
-    expect(withdrawal.getAmountFormat("credit")).toBe("");
+    expect(withdrawal.getStatmentFormat()).toBe("\n14/01/2023 || || 500.00 ||");
   });
 });
 
-describe("checks if transaction is credit or debit and returns value", () => {
+describe("checks if transaction is credit or debit and returns correct + or - value", () => {
   it("when a deposit of 1000 on 10-01-2023", () => {
     const deposit = new Transaction("credit", 1000, "10/01/2023");
     expect(deposit.getValue()).toBe(1000);

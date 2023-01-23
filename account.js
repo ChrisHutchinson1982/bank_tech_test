@@ -15,6 +15,7 @@ class Account {
 
   printStatement() {
     const statement = this.#getHeaders() + this.#getTransactions();
+
     return statement;
   }
 
@@ -26,11 +27,10 @@ class Account {
     this.currentBalance = 0;
 
     const transactions = this.allTransactions.map((transaction) => {
-      const credit = transaction.getAmountFormat("credit");
-      const debit = transaction.getAmountFormat("debit");
+      const dateAndAmount = transaction.getStatmentFormat();
       const balance = this.#getBalance(transaction);
 
-      return `\n${transaction.date} || ${credit}|| ${debit}|| ${balance}`;
+      return `${dateAndAmount} ${balance}`;
     });
 
     return transactions.reverse().join("");
@@ -39,6 +39,7 @@ class Account {
   #getBalance(transaction) {
     this.currentBalance += transaction.getValue();
     const balance = parseFloat(this.currentBalance).toFixed(2);
+
     return balance;
   }
 
