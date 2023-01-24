@@ -159,3 +159,42 @@ describe("returns error and does not add transaction", () => {
     expect(account.printStatement()).toBe("date || credit || debit || balance");
   });
 });
+
+describe("re-orders transactions and returns printed bank statement", () => {
+  it("when two transactions not in date order", () => {
+    const account = new Account();
+    const depositOne = new Transaction("credit", 2000, "13/01/2023");
+    account.add(depositOne);
+    const depositTwo = new Transaction("credit", 1000, "10/01/2023");
+    account.add(depositTwo);
+
+    expect(account.sortTransactionsByDate()).toEqual([
+      { amount: 1000, date: "10/01/2023", type: "credit" },
+      { amount: 2000, date: "13/01/2023", type: "credit" },
+    ]);
+    expect(account.printStatement()).toBe(
+      "date || credit || debit || balance\n13/01/2023 || 2000.00 || || 3000.00\n10/01/2023 || 1000.00 || || 1000.00"
+    );
+  });
+  it("when various transactions not in date order", () => {
+    const account = new Account();
+    const depositOne = new Transaction("credit", 2000, "13/01/2023");
+    account.add(depositOne);
+    const depositTwo = new Transaction("credit", 1000, "10/01/2023");
+    account.add(depositTwo);
+    const withdrawalOne = new Transaction("debit", 499.5, "12/01/2023");
+    account.add(withdrawalOne);
+    const withdrawalTwo = new Transaction("debit", 2500.25, "15/01/2023");
+    account.add(withdrawalTwo);
+
+    expect(account.sortTransactionsByDate()).toEqual([
+      { amount: 1000, date: "10/01/2023", type: "credit" },
+      { amount: 499.5, date: "12/01/2023", type: "debit" },
+      { amount: 2000, date: "13/01/2023", type: "credit" },
+      { amount: 2500.25, date: "15/01/2023", type: "debit" },
+    ]);
+    expect(account.printStatement()).toBe(
+      "date || credit || debit || balance\n15/01/2023 || || 2500.25 || 0.25\n13/01/2023 || 2000.00 || || 2500.50\n12/01/2023 || || 499.50 || 500.50\n10/01/2023 || 1000.00 || || 1000.00"
+    );
+  });
+});

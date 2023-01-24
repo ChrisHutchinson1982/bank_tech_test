@@ -21,6 +21,16 @@ class Account {
     return statement;
   }
 
+  sortTransactionsByDate() {
+    return this.allTransactions.sort((a, b) => {
+      // '01/03/2014'.split('/')
+      // gives ["01", "03", "2014"]
+      a = a.date.split("/");
+      b = b.date.split("/");
+      return a[2] - b[2] || a[1] - b[1] || a[0] - b[0];
+    });
+  }
+
   #getHeaders() {
     return "date || credit || debit || balance";
   }
@@ -30,7 +40,7 @@ class Account {
     this.currentBalance = 0;
 
     // maps transactions into correct format
-    const transactions = this.allTransactions.map((transaction) => {
+    const transactions = this.sortTransactionsByDate().map((transaction) => {
       // gets date and amount string
       const dateAndAmount = transaction.getStatmentFormat();
       // and current balance
