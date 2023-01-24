@@ -84,7 +84,7 @@ describe("returns error and does not add transaction", () => {
 
   it("when transaction amount is not a number", () => {
     const account = new Account();
-    const transaction = new Transaction("debit", "something", "14/01/2023");
+    const transaction = new Transaction("credit", "something", "14/01/2023");
 
     try {
       account.add(transaction);
@@ -100,7 +100,7 @@ describe("returns error and does not add transaction", () => {
 
   it("when transaction amount is not a negative number", () => {
     const account = new Account();
-    const transaction = new Transaction("debit", -500, "14/01/2023");
+    const transaction = new Transaction("credit", -500, "14/01/2023");
 
     try {
       account.add(transaction);
@@ -115,7 +115,7 @@ describe("returns error and does not add transaction", () => {
   });
   xit("when transaction date is not a date", () => {
     const account = new Account();
-    const transaction = new Transaction("debit", 500, "something");
+    const transaction = new Transaction("credit", 500, "something");
 
     try {
       account.add(transaction);
@@ -130,7 +130,7 @@ describe("returns error and does not add transaction", () => {
   });
   xit("when transaction date is incorrect date format yyyy/mm/dd", () => {
     const account = new Account();
-    const transaction = new Transaction("debit", 500, "2012/02/14");
+    const transaction = new Transaction("credit", 500, "2012/02/14");
 
     try {
       account.add(transaction);
@@ -145,7 +145,7 @@ describe("returns error and does not add transaction", () => {
   });
   xit("when transaction date is incorrect date format mm/dd/yyyy", () => {
     const account = new Account();
-    const transaction = new Transaction("debit", 500, "12/30/2012");
+    const transaction = new Transaction("credit", 500, "12/30/2012");
 
     try {
       account.add(transaction);

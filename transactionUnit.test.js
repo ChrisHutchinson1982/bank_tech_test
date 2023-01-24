@@ -80,12 +80,20 @@ describe("validAmount - checks if valid transaction amount and returns", () => {
 });
 
 describe("validDate - checks if valid transaction date and returns", () => {
-  it("true when a transaction date is DD/MM/YYYY", () => {
+  it("true when a transaction date is dd/mm/yyyy", () => {
     const transaction = new Transaction("credit", 1000, "10/01/2023");
     expect(transaction.validDate()).toBe(true);
   });
-  it("false when a transaction date is not a date", () => {
+  it("false transaction date is not a date", () => {
     const transaction = new Transaction("credit", 1000, "something");
+    expect(transaction.validDate()).toBe(false);
+  });
+  it("false when a transaction date is incorrect date format yyyy/mm/dd", () => {
+    const transaction = new Transaction("credit", 1000, "2023/01/10");
+    expect(transaction.validDate()).toBe(false);
+  });
+  it("false when a transaction date is incorrect date format mm/dd/yyyy", () => {
+    const transaction = new Transaction("credit", 1000, "12/13/2022");
     expect(transaction.validDate()).toBe(false);
   });
 });
