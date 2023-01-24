@@ -53,21 +53,17 @@ class Account {
   }
 
   #errorHandler(transaction) {
+    const errorMessage = "Unable to complete transaction: ";
+
     // throws corresponding error if transaction is not a valid entry
     if (!transaction.validType()) {
-      throw new Error(
-        "Unable to complete transaction: invalid transaction type"
-      );
+      throw new Error(`${errorMessage}invalid transaction type`);
     } else if (!transaction.validAmount()) {
-      throw new Error(
-        "Unable to complete transaction: invalid transaction amount"
-      );
+      throw new Error(`${errorMessage}invalid transaction amount`);
     } else if (!transaction.validDate()) {
-      throw new Error(
-        "Unable to complete transaction: invalid transaction date"
-      );
+      throw new Error(`${errorMessage}invalid transaction date`);
     } else if (this.totalBalance + transaction.getValue() < 0) {
-      throw new Error("Unable to complete transaction: insufficient funds");
+      throw new Error(`${errorMessage}insufficient funds`);
     }
   }
 }
