@@ -31,3 +31,54 @@ date || credit || debit || balance
 13/01/2023 || 2000.00 || || 3000.00
 10/01/2023 || 1000.00 || || 1000.00
 ```
+
+## Installation/Usage Instructions
+
+To download and initialise the project:
+
+```sh
+$ git clone https://github.com/ChrisHutchinson1982/bank_tech_test.git
+$ cd bank_tech_test
+$ npm install
+$ jest
+```
+
+To run the code:
+
+```sh
+$ node
+
+// Step 1 - require Account class
+$ const Account = require("./lib/account");
+
+// Step 2 - create new instance of account
+$ const account = new Account();
+
+// Step 3 - require Transaction class
+$ const Transaction = require("./lib/transaction");
+
+// Step 4 - create new instance of Transaction(type, amount, date)
+  // > type should be either "credit" or "debit"
+  // > amount should be a positive number
+  // > date should be "dd/mm/yyyy" format
+$ const transaction = new Transaction("credit", 1000, "10/01/2023");
+
+// Step 5 - add transaction to account
+  // note: will throw pre-built errors if type, amount, date formats are invalid
+$ account.add(transaction);
+
+// Repeat Steps 4 & 5 with new details as required
+
+// Step 6 - console log to view statement
+$ console.log(account.printStatement());
+
+```
+
+To run the tests:
+
+```sh
+// run tests
+$ jest
+// run test and check coverage
+$ jest --coverage
+```
