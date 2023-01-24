@@ -122,8 +122,8 @@ $ jest --coverage
 
 The code is structured into two classes:
 
-- Transaction Class: This is used to initialise each transaction with date, amount and type (credit and debit) information and is responsible for all transaction specific methods.
+- Transaction Class: This is used to initialise each transaction with date, amount and type (credit and debit) information and is responsible for transaction specific methods.
 
-For example, it is used to check inputs are valid, gets value to add to balance and formats transaction string for statement.
+It is used to check inputs are valid, gets value to add to balance and formats transaction string for statement.
 
-- Account Class: This is used to store all transaction, track the balance and to return a printed statement. It will throw errors if transaction inputs are invalid and re-order transaction by date.
+- Account Class: This is used to store all transaction, tracks the balance and to return a printed statement. It will throw errors if transaction inputs are invalid and re-order transaction by date.
