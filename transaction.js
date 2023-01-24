@@ -18,7 +18,7 @@ class Transaction {
   }
 
   checkType() {
-    return this.type === "credit";
+    return this.type === "credit" || this.type === "debit";
   }
 
   #getAmountFormat() {

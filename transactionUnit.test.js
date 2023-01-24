@@ -15,7 +15,7 @@ describe("creates a transaction oject", () => {
   });
 });
 
-describe("returns correct format for statement", () => {
+describe("getStatmentFormat - returns correct format for statement", () => {
   it("when a deposit of 1000 on 10-01-2023", () => {
     const deposit = new Transaction("credit", 1000, "10/01/2023");
     expect(deposit.getStatmentFormat()).toBe("\n10/01/2023 || 1000.00 || ||");
@@ -26,7 +26,7 @@ describe("returns correct format for statement", () => {
   });
 });
 
-describe("checks if transaction is credit or debit and returns correct + or - value", () => {
+describe("getValue - checks if transaction is credit or debit and returns correct + or - value", () => {
   it("when a deposit of 1000 on 10-01-2023", () => {
     const deposit = new Transaction("credit", 1000, "10/01/2023");
     expect(deposit.getValue()).toBe(1000);
@@ -37,17 +37,17 @@ describe("checks if transaction is credit or debit and returns correct + or - va
   });
 });
 
-describe("checks if valid transaction type and returns", () => {
+describe("checkType - checks if valid transaction type and returns", () => {
   it("true when a transaction type is credit", () => {
     const transaction = new Transaction("credit", 1000, "10/01/2023");
     expect(transaction.checkType()).toBe(true);
   });
-  xit("true when a transaction type is debit", () => {
+  it("true when a transaction type is debit", () => {
     const transaction = new Transaction("debit", 1000, "10/01/2023");
     expect(transaction.checkType()).toBe(true);
   });
-  xit("false when a transaction type is incorrect", () => {
+  it("false when a transaction type is incorrect", () => {
     const transaction = new Transaction("something", 1000, "10/01/2023");
-    expect(transaction.checkType()).toBe(true);
+    expect(transaction.checkType()).toBe(false);
   });
 });
