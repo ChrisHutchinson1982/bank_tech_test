@@ -40,13 +40,28 @@ describe("getValue - checks if transaction is credit or debit and returns correc
 describe("checkType - checks if valid transaction type and returns", () => {
   it("true when a transaction type is credit", () => {
     const transaction = new Transaction("credit", 1000, "10/01/2023");
-    expect(transaction.checkType()).toBe(true);
+    expect(transaction.validType()).toBe(true);
   });
   it("true when a transaction type is debit", () => {
     const transaction = new Transaction("debit", 1000, "10/01/2023");
-    expect(transaction.checkType()).toBe(true);
+    expect(transaction.validType()).toBe(true);
   });
   it("false when a transaction type is incorrect", () => {
+    const transaction = new Transaction("something", 1000, "10/01/2023");
+    expect(transaction.validType()).toBe(false);
+  });
+});
+
+describe("checkAmount - checks if valid transaction type and returns", () => {
+  xit("true when a transaction type is credit", () => {
+    const transaction = new Transaction("credit", 1000, "10/01/2023");
+    expect(transaction.checkType()).toBe(true);
+  });
+  xit("true when a transaction type is debit", () => {
+    const transaction = new Transaction("debit", 1000, "10/01/2023");
+    expect(transaction.checkType()).toBe(true);
+  });
+  xit("false when a transaction type is incorrect", () => {
     const transaction = new Transaction("something", 1000, "10/01/2023");
     expect(transaction.checkType()).toBe(false);
   });

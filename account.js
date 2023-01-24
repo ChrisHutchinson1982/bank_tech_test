@@ -44,7 +44,11 @@ class Account {
   }
 
   #errorHandler(transaction) {
-    if (this.totalBalance + transaction.getValue() < 0) {
+    if (!transaction.validType()) {
+      throw new Error(
+        "Unable to complete transaction: invalid transaction type"
+      );
+    } else if (this.totalBalance + transaction.getValue() < 0) {
       throw new Error("Unable to complete transaction: insufficient funds");
     }
   }

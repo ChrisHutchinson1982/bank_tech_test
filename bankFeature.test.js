@@ -63,7 +63,7 @@ describe("returns error", () => {
       );
     }
   });
-  xit("when transaction type is not debit or credit", () => {
+  it("when transaction type is not debit or credit", () => {
     const account = new Account();
     const transaction = new Transaction("something", 500, "14/01/2023");
 

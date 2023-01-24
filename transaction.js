@@ -17,7 +17,7 @@ class Transaction {
     return `\n${this.date} || ${this.#getAmountFormat()}||`;
   }
 
-  checkType() {
+  validType() {
     return this.type === "credit" || this.type === "debit";
   }
 
