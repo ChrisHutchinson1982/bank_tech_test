@@ -21,6 +21,10 @@ class Transaction {
     return this.type === "credit" || this.type === "debit";
   }
 
+  validAmount() {
+    return !isNaN(this.amount);
+  }
+
   #getAmountFormat() {
     const amount = parseFloat(this.amount).toFixed(2);
 
