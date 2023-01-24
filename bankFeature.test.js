@@ -98,7 +98,7 @@ describe("returns error and does not add transaction", () => {
     expect(account.printStatement()).toBe("date || credit || debit || balance");
   });
 
-  xit("when transaction amount is not a negative number", () => {
+  it("when transaction amount is not a negative number", () => {
     const account = new Account();
     const transaction = new Transaction("debit", -500, "14/01/2023");
 
