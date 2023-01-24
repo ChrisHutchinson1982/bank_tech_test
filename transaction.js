@@ -22,7 +22,7 @@ class Transaction {
   }
 
   validAmount() {
-    return !isNaN(this.amount);
+    return !isNaN(this.amount) && this.amount > 0;
   }
 
   #getAmountFormat() {

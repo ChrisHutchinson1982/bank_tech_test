@@ -49,7 +49,7 @@ describe("returns printed bank statement", () => {
   });
 });
 
-describe("returns error", () => {
+describe("returns error and does not add transaction", () => {
   it("when withdrawal is greater than balance", () => {
     const account = new Account();
     const withdrawal = new Transaction("debit", 500, "14/01/2023");
@@ -62,6 +62,8 @@ describe("returns error", () => {
         "Unable to complete transaction: insufficient funds"
       );
     }
+
+    expect(account.printStatement()).toBe("date || credit || debit || balance");
   });
 
   it("when transaction type is not debit or credit", () => {
@@ -76,6 +78,8 @@ describe("returns error", () => {
         "Unable to complete transaction: invalid transaction type"
       );
     }
+
+    expect(account.printStatement()).toBe("date || credit || debit || balance");
   });
 
   it("when transaction amount is not a number", () => {
@@ -90,6 +94,8 @@ describe("returns error", () => {
         "Unable to complete transaction: invalid transaction amount"
       );
     }
+
+    expect(account.printStatement()).toBe("date || credit || debit || balance");
   });
 
   xit("when transaction amount is not a negative number", () => {
@@ -104,6 +110,8 @@ describe("returns error", () => {
         "Unable to complete transaction: invalid transaction amount"
       );
     }
+
+    expect(account.printStatement()).toBe("date || credit || debit || balance");
   });
   xit("when transaction date is not a date", () => {
     const account = new Account();
@@ -117,6 +125,8 @@ describe("returns error", () => {
         "Unable to complete transaction: invalid transaction date"
       );
     }
+
+    expect(account.printStatement()).toBe("date || credit || debit || balance");
   });
   xit("when transaction date is incorrect date format yyyy/mm/dd", () => {
     const account = new Account();
@@ -130,6 +140,8 @@ describe("returns error", () => {
         "Unable to complete transaction: invalid transaction date"
       );
     }
+
+    expect(account.printStatement()).toBe("date || credit || debit || balance");
   });
   xit("when transaction date is incorrect date format mm/dd/yyyy", () => {
     const account = new Account();
@@ -143,5 +155,7 @@ describe("returns error", () => {
         "Unable to complete transaction: invalid transaction date"
       );
     }
+
+    expect(account.printStatement()).toBe("date || credit || debit || balance");
   });
 });
