@@ -37,7 +37,7 @@ describe("getValue - checks if transaction is credit or debit and returns correc
   });
 });
 
-describe("checkType - checks if valid transaction type and returns", () => {
+describe("validType - checks if valid transaction type and returns", () => {
   it("true when a transaction type is credit", () => {
     const transaction = new Transaction("credit", 1000, "10/01/2023");
     expect(transaction.validType()).toBe(true);
@@ -52,7 +52,7 @@ describe("checkType - checks if valid transaction type and returns", () => {
   });
 });
 
-describe("checkAmount - checks if valid transaction amount and returns", () => {
+describe("validAmount - checks if valid transaction amount and returns", () => {
   it("true when a transaction amount is a number", () => {
     const transaction = new Transaction("credit", 1000, "10/01/2023");
     expect(transaction.validAmount()).toBe(true);
@@ -76,5 +76,12 @@ describe("checkAmount - checks if valid transaction amount and returns", () => {
   it("false when a transaction amount is zero", () => {
     const transaction = new Transaction("credit", 0, "10/01/2023");
     expect(transaction.validAmount()).toBe(false);
+  });
+});
+
+describe("validDate - checks if valid transaction date and returns", () => {
+  it("true when a transaction date is DD/MM/YYYY", () => {
+    const transaction = new Transaction("credit", 1000, "10/01/2023");
+    expect(transaction.validDate()).toBe(true);
   });
 });
