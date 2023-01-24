@@ -1,8 +1,12 @@
 const Statement = require("../lib/statement");
 
 describe("returns printed bank statement", () => {
-  xit("when no transaction have been made", () => {
-    const statement = new Statement();
+  it("when no transaction have been made", () => {
+    accountDouble = {
+      sortByDate: () => [],
+    };
+
+    const statement = new Statement(accountDouble);
     expect(statement.printStatement()).toBe(
       "date || credit || debit || balance"
     );
