@@ -112,12 +112,15 @@ describe("returns error and does not add transaction", () => {
     expect(account.printStatement()).toBe("date || credit || debit || balance");
   });
 
-  xit("when transaction type is not debit or credit", () => {
+  it("when transaction type is not debit or credit", () => {
     const account = new Account();
-    const transaction = new Transaction("something", 500, "14/01/2023");
+
+    const transactionDouble = {
+      validType: () => false,
+    };
 
     try {
-      account.add(transaction);
+      account.add(transactionDouble);
     } catch (error) {
       expect(error).toBeInstanceOf(Error);
       expect(error.message).toBe(
