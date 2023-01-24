@@ -63,6 +63,7 @@ describe("returns error", () => {
       );
     }
   });
+
   it("when transaction type is not debit or credit", () => {
     const account = new Account();
     const transaction = new Transaction("something", 500, "14/01/2023");
@@ -76,7 +77,8 @@ describe("returns error", () => {
       );
     }
   });
-  xit("when transaction amount is not a number", () => {
+
+  it("when transaction amount is not a number", () => {
     const account = new Account();
     const transaction = new Transaction("debit", "something", "14/01/2023");
 
@@ -89,6 +91,7 @@ describe("returns error", () => {
       );
     }
   });
+
   xit("when transaction amount is not a negative number", () => {
     const account = new Account();
     const transaction = new Transaction("debit", -500, "14/01/2023");

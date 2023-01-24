@@ -48,6 +48,10 @@ class Account {
       throw new Error(
         "Unable to complete transaction: invalid transaction type"
       );
+    } else if (!transaction.validAmount()) {
+      throw new Error(
+        "Unable to complete transaction: invalid transaction amount"
+      );
     } else if (this.totalBalance + transaction.getValue() < 0) {
       throw new Error("Unable to complete transaction: insufficient funds");
     }
