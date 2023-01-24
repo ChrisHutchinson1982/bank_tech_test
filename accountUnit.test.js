@@ -112,7 +112,7 @@ describe("returns error and does not add transaction", () => {
     expect(account.printStatement()).toBe("date || credit || debit || balance");
   });
 
-  it("when transaction type is not debit or credit", () => {
+  it("when transaction type is not valid entry", () => {
     const account = new Account();
 
     const transactionDouble = {
@@ -131,12 +131,16 @@ describe("returns error and does not add transaction", () => {
     expect(account.printStatement()).toBe("date || credit || debit || balance");
   });
 
-  xit("when transaction amount is not a number", () => {
+  it("when transaction amount is not valid entry", () => {
     const account = new Account();
-    const transaction = new Transaction("credit", "something", "14/01/2023");
+
+    const transactionDouble = {
+      validType: () => true,
+      validAmount: () => false,
+    };
 
     try {
-      account.add(transaction);
+      account.add(transactionDouble);
     } catch (error) {
       expect(error).toBeInstanceOf(Error);
       expect(error.message).toBe(
@@ -147,21 +151,6 @@ describe("returns error and does not add transaction", () => {
     expect(account.printStatement()).toBe("date || credit || debit || balance");
   });
 
-  xit("when transaction amount is not a negative number", () => {
-    const account = new Account();
-    const transaction = new Transaction("credit", -500, "14/01/2023");
-
-    try {
-      account.add(transaction);
-    } catch (error) {
-      expect(error).toBeInstanceOf(Error);
-      expect(error.message).toBe(
-        "Unable to complete transaction: invalid transaction amount"
-      );
-    }
-
-    expect(account.printStatement()).toBe("date || credit || debit || balance");
-  });
   xit("when transaction date is not a date", () => {
     const account = new Account();
     const transaction = new Transaction("credit", 500, "something");
