@@ -50,7 +50,7 @@ describe("returns printed bank statement", () => {
 });
 
 describe("returns error", () => {
-  it("when no deposits but a withdrawal of 500 on 14/01/2023", () => {
+  it("when withdrawal is greater than balance", () => {
     const account = new Account();
     const withdrawal = new Transaction("debit", 500, "14/01/2023");
 
@@ -63,5 +63,82 @@ describe("returns error", () => {
       );
     }
   });
+  xit("when transaction type is not debit or credit", () => {
+    const account = new Account();
+    const transaction = new Transaction("something", 500, "14/01/2023");
+
+    try {
+      account.add(transaction);
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error.message).toBe(
+        "Unable to complete transaction: invalid transaction type"
+      );
+    }
+  });
+  xit("when transaction amount is not a number", () => {
+    const account = new Account();
+    const transaction = new Transaction("debit", "something", "14/01/2023");
+
+    try {
+      account.add(transaction);
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error.message).toBe(
+        "Unable to complete transaction: invalid transaction amount"
+      );
+    }
+  });
+  xit("when transaction amount is not a negative number", () => {
+    const account = new Account();
+    const transaction = new Transaction("debit", -500, "14/01/2023");
+
+    try {
+      account.add(transaction);
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error.message).toBe(
+        "Unable to complete transaction: invalid transaction amount"
+      );
+    }
+  });
+  xit("when transaction date is not a date", () => {
+    const account = new Account();
+    const transaction = new Transaction("debit", 500, "something");
+
+    try {
+      account.add(transaction);
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error.message).toBe(
+        "Unable to complete transaction: invalid transaction date"
+      );
+    }
+  });
+  xit("when transaction date is incorrect date format yyyy/mm/dd", () => {
+    const account = new Account();
+    const transaction = new Transaction("debit", 500, "2012/02/14");
+
+    try {
+      account.add(transaction);
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error.message).toBe(
+        "Unable to complete transaction: invalid transaction date"
+      );
+    }
+  });
+  xit("when transaction date is incorrect date format mm/dd/yyyy", () => {
+    const account = new Account();
+    const transaction = new Transaction("debit", 500, "12/30/2012");
+
+    try {
+      account.add(transaction);
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error.message).toBe(
+        "Unable to complete transaction: invalid transaction date"
+      );
+    }
+  });
 });
-// edge cases 0dp amount and differemt date formats

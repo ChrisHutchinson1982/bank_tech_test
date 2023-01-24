@@ -17,6 +17,10 @@ class Transaction {
     return `\n${this.date} || ${this.#getAmountFormat()}||`;
   }
 
+  checkType() {
+    return this.type === "credit";
+  }
+
   #getAmountFormat() {
     const amount = parseFloat(this.amount).toFixed(2);
 

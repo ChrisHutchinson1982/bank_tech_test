@@ -28,7 +28,7 @@ class Account {
 
     const transactions = this.allTransactions.map((transaction) => {
       const dateAndAmount = transaction.getStatmentFormat();
-      const balance = this.#getBalance(transaction);
+      const balance = this.#getBalanceFormat(transaction);
 
       return `${dateAndAmount} ${balance}`;
     });
@@ -36,7 +36,7 @@ class Account {
     return transactions.reverse().join("");
   }
 
-  #getBalance(transaction) {
+  #getBalanceFormat(transaction) {
     this.currentBalance += transaction.getValue();
     const balance = parseFloat(this.currentBalance).toFixed(2);
 
