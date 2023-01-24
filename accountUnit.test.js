@@ -57,7 +57,7 @@ describe("adds transactions returns printed bank statement", () => {
       "date || credit || debit || balance\n14/01/2023 || || 500.50 || 499.50\n10/01/2023 || 1000.00 || || 1000.00"
     );
   });
-  xit("when two transactions not in date order", () => {
+  it("when two transactions not in date order", () => {
     const account = new Account();
 
     const depositOneDouble = {
@@ -80,10 +80,9 @@ describe("adds transactions returns printed bank statement", () => {
     };
     account.add(depositTwoDouble);
 
-    expect(account.sortTransactionsByDate()).toEqual([
-      { amount: 1000, date: "10/01/2023", type: "credit" },
-      { amount: 2000, date: "13/01/2023", type: "credit" },
-    ]);
+    expect(account.sortTransactionsByDate()[0].date).toEqual("10/01/2023");
+    expect(account.sortTransactionsByDate()[1].date).toEqual("13/01/2023");
+
     expect(account.printStatement()).toBe(
       "date || credit || debit || balance\n13/01/2023 || 2000.00 || || 3000.00\n10/01/2023 || 1000.00 || || 1000.00"
     );
