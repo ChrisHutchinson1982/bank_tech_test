@@ -58,27 +58,35 @@ $ const Account = require("./lib/account");
 
 $ const account = new Account();
 
-// Step 3 - require Transaction class
+// Step 3 - require Statement class
+
+$ const Statement = require("./lib/statement");
+
+// Step 4 - create new instance of statement with account
+
+$ const statement = new Statement(account);
+
+// Step 5 - require Transaction class
 
 $ const Transaction = require("./lib/transaction");
 
-// Step 4 - create new instance of Transaction(type, amount, date)
+// Step 6 - create new instance of Transaction(type, amount, date)
   // type should be either "credit" or "debit"
   // amount should be a positive number
   // date should be "dd/mm/yyyy" format
 
 $ const transaction = new Transaction("credit", 1000, "10/01/2023");
 
-// Step 5 - add transaction to account instance
+// Step 7 - add transaction to account instance
   // note: will throw pre-built errors if type, amount, date formats are invalid
 
 $ account.add(transaction);
 
-// Repeat Steps 4 & 5 with new details as required
+// Repeat Steps 6 & 7 with new details as required
 
-// Step 6 - console log to view statement
+// Step 8 - console log to view statement
 
-$ console.log(account.printStatement());
+$ console.log(statement.printStatement());
 
 // To exit the node REPL
 
@@ -98,32 +106,44 @@ $ jest --coverage
 
 ## Approach
 
-1. Mapped out class design using excalidraw
+1. Mapped out initial class design using excalidraw
 
 ![Class Diagram](/class_diagram.png)
 
 2. Added initial feature tests for standard inputs
 
-3. Test drove these features, adding unit tests as required and refactoring throughout
+3. Test drove these features, refactoring throughout and adding Transaction Class unit tests as required
 
 4. Added error handler feature tests for invalid inputs
 
-5. Test drove these features, adding unit tests as required and refactoring throughout
+5. Test drove these features, refactoring throughout and adding Transaction Class unit tests as required
 
 6. Added edge case feature tests
 
-7. Test drove these features, adding unit tests as required and refactoring throughout
+7. Test drove these features, refactoring throughout and adding Transaction Class unit tests as required
 
-8. Added additional unit tests to mock the dependencies of the object they are testing
+8. Added Account Class unit tests mocking the dependencies of the object they are testing
 
-9. Update README with instructions and information
+9. Refactored class design to include additional Statement Class and reduce the responsibilities of the Account Class
+
+![Class Diagram](/revised_class_diagram.png)
+
+10. Test drove new Statement Class, refactoring existing feature and unit tests.
+
+11. Added Statement Class unit tests mocking the dependencies of the object they are testing
 
 ## Code Structure
 
-The code is structured into two classes:
+The code is structured into three classes:
 
-- Transaction Class: This is used to initialise each transaction with date, amount and type (credit and debit) information and is responsible for transaction specific methods.
+- **Transaction Class**
 
-It is used to check inputs are valid, gets value to add to balance and formats transaction string for statement.
+  This is used to initialise each transaction with date, amount and type (credit and debit) information and is responsible for transaction specific methods.
 
-- Account Class: This is used to store all transaction, tracks the balance and to return a printed statement. It will throw errors if transaction inputs are invalid and re-order transaction by date.
+- **Account Class**
+
+  This is used to store all transactions, returning a list sorted by date. It will throw errors if transaction inputs are invalid.
+
+- **Statement Class**
+
+  This is initialise by an instance of Account Class, returning a printed statement.
