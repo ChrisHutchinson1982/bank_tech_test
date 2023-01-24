@@ -201,7 +201,7 @@ describe("re-orders transactions and returns printed bank statement", () => {
     const depositTwo = new Transaction("credit", 1000, "10/01/2023");
     account.add(depositTwo);
 
-    expect(account.sortTransactionsByDate()).toEqual([
+    expect(account.sortByDate()).toEqual([
       { amount: 1000, date: "10/01/2023", type: "credit" },
       { amount: 2000, date: "13/01/2023", type: "credit" },
     ]);
@@ -222,7 +222,7 @@ describe("re-orders transactions and returns printed bank statement", () => {
     const withdrawalTwo = new Transaction("debit", 2500.25, "15/01/2023");
     account.add(withdrawalTwo);
 
-    expect(account.sortTransactionsByDate()).toEqual([
+    expect(account.sortByDate()).toEqual([
       { amount: 1000, date: "10/01/2023", type: "credit" },
       { amount: 499.5, date: "12/01/2023", type: "debit" },
       { amount: 2000, date: "13/01/2023", type: "credit" },

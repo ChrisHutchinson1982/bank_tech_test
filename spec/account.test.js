@@ -14,21 +14,25 @@ describe("creates an account object", () => {
 describe("adds transactions returns printed bank statement", () => {
   it("when no transaction have been made", () => {
     const account = new Account();
-    expect(account.printStatement()).toBe("date || credit || debit || balance");
+    expect(account.sortByDate()).toEqual([]);
   });
   it("when a deposit of 1000 on 10/01/2023", () => {
     const account = new Account();
     const depositDouble = {
       getValue: () => 1000,
-      getStatmentFormat: () => "\n10/01/2023 || 1000.00 || ||",
+      // getStatmentFormat: () => "\n10/01/2023 || 1000.00 || ||",
       validType: () => true,
       validAmount: () => true,
       validDate: () => true,
+      date: "10/01/2023",
+      amount: 1000,
+      type: "credit",
     };
     account.add(depositDouble);
-    expect(account.printStatement()).toBe(
-      "date || credit || debit || balance\n10/01/2023 || 1000.00 || || 1000.00"
-    );
+
+    expect(account.sortByDate()[0].date).toBe("10/01/2023");
+    expect(account.sortByDate()[0].amount).toBe(1000);
+    expect(account.sortByDate()[0].type).toBe("credit");
   });
   it("when a deposit of 1000 on 10/01/2023 and a withdrawal of 500.50 on 14/01/2023", () => {
     const account = new Account();
@@ -80,8 +84,8 @@ describe("adds transactions returns printed bank statement", () => {
     };
     account.add(depositTwoDouble);
 
-    expect(account.sortTransactionsByDate()[0].date).toEqual("10/01/2023");
-    expect(account.sortTransactionsByDate()[1].date).toEqual("13/01/2023");
+    expect(account.sortByDate()[0].date).toEqual("10/01/2023");
+    expect(account.sortByDate()[1].date).toEqual("13/01/2023");
 
     expect(account.printStatement()).toBe(
       "date || credit || debit || balance\n13/01/2023 || 2000.00 || || 3000.00\n10/01/2023 || 1000.00 || || 1000.00"
