@@ -95,3 +95,35 @@ $ jest
 $ jest --coverage
 
 ```
+
+## Approach
+
+1. Mapped out class design using excalidraw
+
+![Class Diagram](/class_diagram.png)
+
+2. Added initial feature tests for standard inputs
+
+3. Test drove these features, adding unit tests as required and refactoring throughout
+
+4. Added error handler feature tests for invalid inputs
+
+5. Test drove these features, adding unit tests as required and refactoring throughout
+
+6. Added edge case feature tests
+
+7. Test drove these features, adding unit tests as required and refactoring throughout
+
+8. Added additional unit tests to mock the dependencies of the object they are testing
+
+9. Update README with instructions and information
+
+## Code Structure
+
+The code is structured into two classes:
+
+- Transaction Class: This is used to initialise each transaction with date, amount and type (credit and debit) information and is responsible for all transaction specific methods.
+
+For example, it is used to check inputs are valid, gets value to add to balance and formats transaction string for statement.
+
+- Account Class: This is used to store all transaction, track the balance and to return a printed statement. It will throw errors if transaction inputs are invalid and re-order transaction by date.
