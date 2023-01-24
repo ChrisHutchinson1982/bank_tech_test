@@ -1,4 +1,5 @@
 const Account = require("../lib/account");
+const Statement = require("../lib/statement");
 const Transaction = require("../lib/transaction");
 
 describe("adds transactions returns printed bank statement", () => {
@@ -6,7 +7,8 @@ describe("adds transactions returns printed bank statement", () => {
     const account = new Account();
     const deposit = new Transaction("credit", 1000, "10/01/2023");
     account.add(deposit);
-    expect(account.printStatement()).toBe(
+    const statement = new Statement(account);
+    expect(statement.printStatement()).toBe(
       "date || credit || debit || balance\n10/01/2023 || 1000.00 || || 1000.00"
     );
   });
