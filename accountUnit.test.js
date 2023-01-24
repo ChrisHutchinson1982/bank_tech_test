@@ -88,3 +88,120 @@ describe("adds transactions returns printed bank statement", () => {
     );
   });
 });
+
+describe("returns error and does not add transaction", () => {
+  it("when withdrawal is greater than balance", () => {
+    const account = new Account();
+
+    const withdrawalDouble = {
+      getValue: () => -500.5,
+      validType: () => true,
+      validAmount: () => true,
+      validDate: () => true,
+    };
+
+    try {
+      account.add(withdrawalDouble);
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error.message).toBe(
+        "Unable to complete transaction: insufficient funds"
+      );
+    }
+
+    expect(account.printStatement()).toBe("date || credit || debit || balance");
+  });
+
+  xit("when transaction type is not debit or credit", () => {
+    const account = new Account();
+    const transaction = new Transaction("something", 500, "14/01/2023");
+
+    try {
+      account.add(transaction);
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error.message).toBe(
+        "Unable to complete transaction: invalid transaction type"
+      );
+    }
+
+    expect(account.printStatement()).toBe("date || credit || debit || balance");
+  });
+
+  xit("when transaction amount is not a number", () => {
+    const account = new Account();
+    const transaction = new Transaction("credit", "something", "14/01/2023");
+
+    try {
+      account.add(transaction);
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error.message).toBe(
+        "Unable to complete transaction: invalid transaction amount"
+      );
+    }
+
+    expect(account.printStatement()).toBe("date || credit || debit || balance");
+  });
+
+  xit("when transaction amount is not a negative number", () => {
+    const account = new Account();
+    const transaction = new Transaction("credit", -500, "14/01/2023");
+
+    try {
+      account.add(transaction);
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error.message).toBe(
+        "Unable to complete transaction: invalid transaction amount"
+      );
+    }
+
+    expect(account.printStatement()).toBe("date || credit || debit || balance");
+  });
+  xit("when transaction date is not a date", () => {
+    const account = new Account();
+    const transaction = new Transaction("credit", 500, "something");
+
+    try {
+      account.add(transaction);
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error.message).toBe(
+        "Unable to complete transaction: invalid transaction date"
+      );
+    }
+
+    expect(account.printStatement()).toBe("date || credit || debit || balance");
+  });
+  xit("when transaction date is incorrect date format yyyy/mm/dd", () => {
+    const account = new Account();
+    const transaction = new Transaction("credit", 500, "2023/01/10");
+
+    try {
+      account.add(transaction);
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error.message).toBe(
+        "Unable to complete transaction: invalid transaction date"
+      );
+    }
+
+    expect(account.printStatement()).toBe("date || credit || debit || balance");
+  });
+  xit("when transaction date is incorrect date format mm/dd/yyyy", () => {
+    const account = new Account();
+    const transaction = new Transaction("credit", 500, "12/13/2022");
+
+    try {
+      account.add(transaction);
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error.message).toBe(
+        "Unable to complete transaction: invalid transaction date"
+      );
+    }
+
+    expect(account.printStatement()).toBe("date || credit || debit || balance");
+  });
+});
