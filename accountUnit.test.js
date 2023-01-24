@@ -151,42 +151,17 @@ describe("returns error and does not add transaction", () => {
     expect(account.printStatement()).toBe("date || credit || debit || balance");
   });
 
-  xit("when transaction date is not a date", () => {
+  it("when transaction date is not valid entry", () => {
     const account = new Account();
-    const transaction = new Transaction("credit", 500, "something");
+
+    const transactionDouble = {
+      validType: () => true,
+      validAmount: () => true,
+      validDate: () => false,
+    };
 
     try {
-      account.add(transaction);
-    } catch (error) {
-      expect(error).toBeInstanceOf(Error);
-      expect(error.message).toBe(
-        "Unable to complete transaction: invalid transaction date"
-      );
-    }
-
-    expect(account.printStatement()).toBe("date || credit || debit || balance");
-  });
-  xit("when transaction date is incorrect date format yyyy/mm/dd", () => {
-    const account = new Account();
-    const transaction = new Transaction("credit", 500, "2023/01/10");
-
-    try {
-      account.add(transaction);
-    } catch (error) {
-      expect(error).toBeInstanceOf(Error);
-      expect(error.message).toBe(
-        "Unable to complete transaction: invalid transaction date"
-      );
-    }
-
-    expect(account.printStatement()).toBe("date || credit || debit || balance");
-  });
-  xit("when transaction date is incorrect date format mm/dd/yyyy", () => {
-    const account = new Account();
-    const transaction = new Transaction("credit", 500, "12/13/2022");
-
-    try {
-      account.add(transaction);
+      account.add(transactionDouble);
     } catch (error) {
       expect(error).toBeInstanceOf(Error);
       expect(error.message).toBe(
