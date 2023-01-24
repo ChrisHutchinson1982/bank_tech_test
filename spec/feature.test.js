@@ -1,5 +1,5 @@
-const Account = require("./account");
-const Transaction = require("./transaction");
+const Account = require("../lib/account");
+const Transaction = require("../lib/transaction");
 
 describe("adds transactions returns printed bank statement", () => {
   it("when a deposit of 1000 on 10/01/2023", () => {

@@ -1,4 +1,4 @@
-const Transaction = require("./transaction");
+const Transaction = require("../lib/transaction");
 
 describe("creates a transaction object", () => {
   it("when a deposit of 1000 on 10-01-2023", () => {

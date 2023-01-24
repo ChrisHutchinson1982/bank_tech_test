@@ -1,4 +1,4 @@
-const Account = require("./account");
+const Account = require("../lib/account");
 
 describe("creates an account object", () => {
   it("with an empty array for allTransactions", () => {
