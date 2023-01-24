@@ -113,7 +113,7 @@ describe("returns error and does not add transaction", () => {
 
     expect(account.printStatement()).toBe("date || credit || debit || balance");
   });
-  xit("when transaction date is not a date", () => {
+  it("when transaction date is not a date", () => {
     const account = new Account();
     const transaction = new Transaction("credit", 500, "something");
 
@@ -128,9 +128,9 @@ describe("returns error and does not add transaction", () => {
 
     expect(account.printStatement()).toBe("date || credit || debit || balance");
   });
-  xit("when transaction date is incorrect date format yyyy/mm/dd", () => {
+  it("when transaction date is incorrect date format yyyy/mm/dd", () => {
     const account = new Account();
-    const transaction = new Transaction("credit", 500, "2012/02/14");
+    const transaction = new Transaction("credit", 500, "2023/01/10");
 
     try {
       account.add(transaction);
@@ -143,9 +143,9 @@ describe("returns error and does not add transaction", () => {
 
     expect(account.printStatement()).toBe("date || credit || debit || balance");
   });
-  xit("when transaction date is incorrect date format mm/dd/yyyy", () => {
+  it("when transaction date is incorrect date format mm/dd/yyyy", () => {
     const account = new Account();
-    const transaction = new Transaction("credit", 500, "12/30/2012");
+    const transaction = new Transaction("credit", 500, "12/13/2022");
 
     try {
       account.add(transaction);

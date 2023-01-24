@@ -39,8 +39,7 @@ class Account {
       return `${dateAndAmount} ${balance}`;
     });
 
-    // reorders to descending order
-    // and converts to string
+    // reorders to descending order and converts to string
     return transactions.reverse().join("");
   }
 
@@ -62,6 +61,10 @@ class Account {
     } else if (!transaction.validAmount()) {
       throw new Error(
         "Unable to complete transaction: invalid transaction amount"
+      );
+    } else if (!transaction.validDate()) {
+      throw new Error(
+        "Unable to complete transaction: invalid transaction date"
       );
     } else if (this.totalBalance + transaction.getValue() < 0) {
       throw new Error("Unable to complete transaction: insufficient funds");
