@@ -11,7 +11,7 @@ describe("creates an account object", () => {
   });
 });
 
-describe("adds transactions returns printed bank statement", () => {
+describe("adds transactions returns sorted list", () => {
   it("when no transaction have been made", () => {
     const account = new Account();
     expect(account.sortByDate()).toEqual([]);
