@@ -39,27 +39,35 @@ describe("adds transactions returns printed bank statement", () => {
 
     const depositDouble = {
       getValue: () => 1000,
-      getStatmentFormat: () => "\n10/01/2023 || 1000.00 || ||",
+      // getStatmentFormat: () => "\n10/01/2023 || 1000.00 || ||",
       validType: () => true,
       validAmount: () => true,
       validDate: () => true,
       date: "10/01/2023",
+      amount: 1000,
+      type: "credit",
     };
     account.add(depositDouble);
 
     const withdrawalDouble = {
       getValue: () => -500.5,
-      getStatmentFormat: () => "\n14/01/2023 || || 500.50 ||",
+      // getStatmentFormat: () => "\n14/01/2023 || || 500.50 ||",
       validType: () => true,
       validAmount: () => true,
       validDate: () => true,
       date: "14/01/2023",
+      amount: 500.5,
+      type: "debit",
     };
     account.add(withdrawalDouble);
 
-    expect(account.printStatement()).toBe(
-      "date || credit || debit || balance\n14/01/2023 || || 500.50 || 499.50\n10/01/2023 || 1000.00 || || 1000.00"
-    );
+    expect(account.sortByDate()[0].date).toBe("10/01/2023");
+    expect(account.sortByDate()[0].amount).toBe(1000);
+    expect(account.sortByDate()[0].type).toBe("credit");
+
+    expect(account.sortByDate()[1].date).toBe("14/01/2023");
+    expect(account.sortByDate()[1].amount).toBe(500.5);
+    expect(account.sortByDate()[1].type).toBe("debit");
   });
   it("when two transactions not in date order", () => {
     const account = new Account();
@@ -76,7 +84,7 @@ describe("adds transactions returns printed bank statement", () => {
 
     const depositTwoDouble = {
       getValue: () => 1000,
-      getStatmentFormat: () => "\n10/01/2023 || 1000.00 || ||",
+      // getStatmentFormat: () => "\n10/01/2023 || 1000.00 || ||",
       validType: () => true,
       validAmount: () => true,
       validDate: () => true,
@@ -86,10 +94,6 @@ describe("adds transactions returns printed bank statement", () => {
 
     expect(account.sortByDate()[0].date).toEqual("10/01/2023");
     expect(account.sortByDate()[1].date).toEqual("13/01/2023");
-
-    expect(account.printStatement()).toBe(
-      "date || credit || debit || balance\n13/01/2023 || 2000.00 || || 3000.00\n10/01/2023 || 1000.00 || || 1000.00"
-    );
   });
 });
 
@@ -113,7 +117,7 @@ describe("returns error and does not add transaction", () => {
       );
     }
 
-    expect(account.printStatement()).toBe("date || credit || debit || balance");
+    expect(account.sortByDate()).toEqual([]);
   });
 
   it("when transaction type is not valid entry", () => {
@@ -132,7 +136,7 @@ describe("returns error and does not add transaction", () => {
       );
     }
 
-    expect(account.printStatement()).toBe("date || credit || debit || balance");
+    expect(account.sortByDate()).toEqual([]);
   });
 
   it("when transaction amount is not valid entry", () => {
@@ -152,7 +156,7 @@ describe("returns error and does not add transaction", () => {
       );
     }
 
-    expect(account.printStatement()).toBe("date || credit || debit || balance");
+    expect(account.sortByDate()).toEqual([]);
   });
 
   it("when transaction date is not valid entry", () => {
@@ -173,6 +177,6 @@ describe("returns error and does not add transaction", () => {
       );
     }
 
-    expect(account.printStatement()).toBe("date || credit || debit || balance");
+    expect(account.sortByDate()).toEqual([]);
   });
 });
