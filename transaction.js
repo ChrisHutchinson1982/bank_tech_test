@@ -30,8 +30,15 @@ class Transaction {
   }
 
   validDate() {
-    // checks if amount is positive number
-    return true;
+    // checks if date is DD/MM/YYYY
+    const dateFormat =
+      /^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/]\d{4}$/;
+
+    if (this.date.match(dateFormat)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   #getAmountFormat() {

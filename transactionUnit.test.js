@@ -84,4 +84,8 @@ describe("validDate - checks if valid transaction date and returns", () => {
     const transaction = new Transaction("credit", 1000, "10/01/2023");
     expect(transaction.validDate()).toBe(true);
   });
+  it("false when a transaction date is not a date", () => {
+    const transaction = new Transaction("credit", 1000, "something");
+    expect(transaction.validDate()).toBe(false);
+  });
 });
