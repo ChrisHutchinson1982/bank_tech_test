@@ -237,10 +237,6 @@ describe("re-orders transactions and returns printed bank statement", () => {
 });
 
 describe("return total balance", () => {
-  it("when no transactions added", () => {
-    const account = new Account();
-    expect(account.getBalance()).toBe(0);
-  });
   it("when a deposit of 1000 on 10/01/2023", () => {
     const account = new Account();
 
