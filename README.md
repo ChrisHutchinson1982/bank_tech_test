@@ -50,42 +50,28 @@ To run the code:
 
 $ node
 
-// Step 1 - require Account class
-
-$ const Account = require("./lib/account");
+// Step 1 - require files
+$ const {Account, Statement, Transaction} = require("./app");
 
 // Step 2 - create new instance of account
-
 $ const account = new Account();
 
-// Step 3 - require Statement class
-
-$ const Statement = require("./lib/statement");
-
-// Step 4 - create new instance of statement with account
-
+// Step 3 - create new instance of statement with account
 $ const statement = new Statement(account);
 
-// Step 5 - require Transaction class
-
-$ const Transaction = require("./lib/transaction");
-
-// Step 6 - create new instance of Transaction(type, amount, date)
-  // type should be either "credit" or "debit"
-  // amount should be a positive number
-  // date should be "dd/mm/yyyy" format
-
+// Step 4 - create new instance of Transaction(type, amount, date)
+  // type = "credit" or "debit"
+  // amount = positive number
+  // date = "dd/mm/yyyy"
 $ const transaction = new Transaction("credit", 1000, "10/01/2023");
 
-// Step 7 - add transaction to account instance
+// Step 5 - add transaction to account instance
   // note: will throw pre-built errors if type, amount, date formats are invalid
-
 $ account.add(transaction);
 
-// Repeat Steps 6 & 7 with new details as required
+// Repeat Steps 4 & 5 with new variable name and details as required
 
-// Step 8 - console log to view statement
-
+// Step 6 - console log to view statement
 $ console.log(statement.printStatement());
 
 // To exit the node REPL
@@ -108,7 +94,7 @@ $ jest --coverage
 
 1. Mapped out initial class design using excalidraw
 
-![Class Diagram](/class_diagram.png)
+![Class Diagram](/images/class_diagram.png)
 
 2. Added initial feature tests for standard inputs
 
@@ -126,7 +112,7 @@ $ jest --coverage
 
 9. Refactored class design to include additional Statement Class and reduce the responsibilities of the Account Class
 
-![Class Diagram](/revised_class_diagram.png)
+![Class Diagram](/images/revised_class_diagram.png)
 
 10. Test drove new Statement Class, refactoring existing feature and unit tests.
 
@@ -147,3 +133,7 @@ The code is structured into three classes:
 - **Statement Class**
 
   This is initialise by an instance of Account Class, returning a printed statement.
+
+## Test Coverage
+
+![Test Coverage](/images/test_coverage.png)
