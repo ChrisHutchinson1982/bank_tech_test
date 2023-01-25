@@ -249,7 +249,7 @@ describe("return total balance", () => {
 
     expect(account.getBalance()).toBe(1000);
   });
-  xit("when a deposit of 1000 on 10/01/2023 and a deposit of 2000.25 on 13/01/2023", () => {
+  it("when a deposit of 1000 on 10/01/2023 and a deposit of 2000.25 on 13/01/2023", () => {
     const account = new Account();
 
     const depositOne = new Transaction("credit", 1000, "10/01/2023");
@@ -259,7 +259,7 @@ describe("return total balance", () => {
 
     expect(account.getBalance()).toBe(3000.25);
   });
-  xit("when a deposit of 1000 on 10/01/2023, a deposit of 2000.25 on 13/01/2023 and a withdrawal of 500 on 14/01/2023", () => {
+  it("when a deposit of 1000 on 10/01/2023, a deposit of 2000.25 on 13/01/2023 and a withdrawal of 500 on 14/01/2023", () => {
     const account = new Account();
 
     const depositOne = new Transaction("credit", 1000, "10/01/2023");
