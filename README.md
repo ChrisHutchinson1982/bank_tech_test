@@ -53,26 +53,36 @@ $ node
 // Step 1 - require files
 $ const {Account, Statement, Transaction} = require("./app");
 
-// Step 2 - create new instance of account
+// Step 2 - create instance of Account
 $ const account = new Account();
 
-// Step 3 - create new instance of statement with account
+// Step 3 - create instance of Statement with account
 $ const statement = new Statement(account);
 
-// Step 4 - create new instance of Transaction(type, amount, date)
+// Step 4 - create instances of Transaction(type, amount, date)
 // > type = "credit" or "debit"
 // > amount = positive number
 // > date = "dd/mm/yyyy"
-$ const transaction = new Transaction("credit", 1000, "10/01/2023");
+$ const transactionOne = new Transaction("credit", 1000, "10/01/2023");
+$ const transactionTwo = new Transaction("credit", 2000, "13/01/2023");
+$ const transactionThree = new Transaction("debit", 500, "14/01/2023");
 
-// Step 5 - add transaction to account instance
+// Step 5 - add transactions to account
 // Note: output pre-built errors if type, amount or date are invalid
-$ account.add(transaction);
+$ account.add(transactionOne);
+$ account.add(transactionTwo);
+$ account.add(transactionThree);
 
-// Repeat Steps 4 & 5 with new variable name and details as required
+// Repeat Steps 4 & 5 with new variable names and details as required
 
 // Step 6 - console log to view statement
 $ console.log(statement.printStatement());
+
+// Then you will see...
+date || credit || debit || balance
+14/01/2023 || || 500.00 || 2500.00
+13/01/2023 || 2000.00 || || 3000.00
+10/01/2023 || 1000.00 || || 1000.00
 
 // To exit the node REPL
 
