@@ -235,3 +235,40 @@ describe("re-orders transactions and returns printed bank statement", () => {
     );
   });
 });
+
+describe("return total balance", () => {
+  it("when no transactions added", () => {
+    const account = new Account();
+    expect(account.getBalance()).toBe(0);
+  });
+  xit("when a deposit of 1000 on 10/01/2023", () => {
+    const account = new Account();
+
+    const deposit = new Transaction("credit", 1000, "10/01/2023");
+    account.add(deposit);
+
+    expect(account.getBalance()).toBe(1000);
+  });
+  xit("when a deposit of 1000 on 10/01/2023 and a deposit of 2000.25 on 13/01/2023", () => {
+    const account = new Account();
+
+    const depositOne = new Transaction("credit", 1000, "10/01/2023");
+    account.add(depositOne);
+    const depositTwo = new Transaction("credit", 2000.25, "13/01/2023");
+    account.add(depositTwo);
+
+    expect(account.getBalance()).toBe(3000.25);
+  });
+  xit("when a deposit of 1000 on 10/01/2023, a deposit of 2000.25 on 13/01/2023 and a withdrawal of 500 on 14/01/2023", () => {
+    const account = new Account();
+
+    const depositOne = new Transaction("credit", 1000, "10/01/2023");
+    account.add(depositOne);
+    const depositTwo = new Transaction("credit", 2000.25, "13/01/2023");
+    account.add(depositTwo);
+    const withdrawal = new Transaction("debit", 500, "14/01/2023");
+    account.add(withdrawal);
+
+    expect(account.getBalance()).toBe(2500.25);
+  });
+});
