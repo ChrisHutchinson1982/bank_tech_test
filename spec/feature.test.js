@@ -241,7 +241,7 @@ describe("return total balance", () => {
     const account = new Account();
     expect(account.getBalance()).toBe(0);
   });
-  xit("when a deposit of 1000 on 10/01/2023", () => {
+  it("when a deposit of 1000 on 10/01/2023", () => {
     const account = new Account();
 
     const deposit = new Transaction("credit", 1000, "10/01/2023");
