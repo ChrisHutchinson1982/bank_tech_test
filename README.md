@@ -60,13 +60,13 @@ $ const account = new Account();
 $ const statement = new Statement(account);
 
 // Step 4 - create new instance of Transaction(type, amount, date)
-  // type = "credit" or "debit"
-  // amount = positive number
-  // date = "dd/mm/yyyy"
+// > type = "credit" or "debit"
+// > amount = positive number
+// > date = "dd/mm/yyyy"
 $ const transaction = new Transaction("credit", 1000, "10/01/2023");
 
 // Step 5 - add transaction to account instance
-  // note: will throw pre-built errors if type, amount, date formats are invalid
+// Note: output pre-built errors if type, amount or date are invalid
 $ account.add(transaction);
 
 // Repeat Steps 4 & 5 with new variable name and details as required
