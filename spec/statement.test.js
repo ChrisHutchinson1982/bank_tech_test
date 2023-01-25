@@ -1,7 +1,7 @@
 const Statement = require("../lib/statement");
 
 describe("returns printed bank statement", () => {
-  it("when no transaction have been made", () => {
+  it("when no transactions have been made", () => {
     accountDouble = {
       sortByDate: () => [],
     };
