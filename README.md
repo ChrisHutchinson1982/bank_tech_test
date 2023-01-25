@@ -128,6 +128,8 @@ $ jest --coverage
 
 11. Added Statement Class unit tests mocking the dependencies of the object they are testing
 
+12. More refactoring following feedback
+
 ## Code Structure
 
 The code is structured into three classes:
