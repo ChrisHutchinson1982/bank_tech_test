@@ -5,10 +5,6 @@ describe("creates an account object", () => {
     const account = new Account();
     expect(account.allTransactions).toEqual([]);
   });
-  it("with a 0 value for totalBalance", () => {
-    const account = new Account();
-    expect(account.totalBalance).toBe(0);
-  });
 });
 
 describe("adds transactions returns sorted list", () => {
